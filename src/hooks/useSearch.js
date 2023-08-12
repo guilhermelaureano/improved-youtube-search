@@ -1,34 +1,41 @@
-import Mock from '@/mock';
-import { useState } from 'react';
+import { useContext } from 'react';
+import { getSearch } from '@/api/search';
+import { SearchContext } from '@/context/searchContext';
+// import { getParameter } from '@/utils';
 
 function useSearch() {
-  const [term, setTerm] = useState('');
-  console.log('🚀 ~ useSearch ~ term:', term);
-  const [data, setData] = useState(Mock);
+  const [entry, setEntry] = useContext(SearchContext);
 
-  const handleTerm = term => {
-    if (term) {
-      setTerm(term);
-    }
-  };
+  async function search(term) {
+    setEntry(prev => ({ ...prev, loadingSearch: true }));
 
-  async function search() {
-    // const url = `https://www.googleapis.com/youtube/v3/search?key=&q=${term}&type=video&part=snippet&order=relevance`;
-    // const res = await fetch(url);
-    // if (!res.ok) {
-    //   throw new Error('Failed to fetch data');
-    // }
-    // setData(res.json());
+    const result = await getSearch(term);
+    console.log('🚀 ~ search ~ result:', result);
+
+    // const { desc, id, title } = getParameter(result.items);
+
+    // const newDesc = entry.descWords;
+    // const newIDList = entry.idList;
+    // const newTitleList = entry.titleWords;
+
+    // newTitleList.push(title);
+    // newDesc.push(desc);
+    // newIDList.push(id);
+
+    setEntry(prev => ({
+      ...prev,
+      result,
+      // descWords: newDesc,
+      // idList: newIDList,
+      loadingSearch: false,
+      // titleWords: newTitleList,
+    }));
   }
 
-  function selectVideo() {}
-
   return {
-    data,
-    handleTerm,
+    data: entry.result,
+    loadingSearch: entry.loadingSearch,
     search,
-    selectVideo,
-    term,
   };
 }
 

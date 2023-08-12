@@ -2,11 +2,15 @@ import { ListGroup } from 'flowbite-react';
 import Image from 'next/image';
 import { memo } from 'react';
 
-function PlayListItem({ item }) {
-  const { snippet, videoId } = item;
-  const url = `https://www.youtube.com/watch?v=${videoId}s`;
+function PlayListItem({ id, snippet }) {
+  const url = `https://www.youtube.com/watch?v=${id}s`;
+
+  if (!snippet?.title) {
+    return;
+  }
+
   return (
-    <ListGroup.Item className="w-full flex flex-col sm:flex-row" key={videoId}>
+    <ListGroup.Item className="w-full flex flex-col sm:flex-row">
       <a href={url} target="_blank">
         <div className="w-full flex flex-col sm:flex-row gap-4">
           <Image
