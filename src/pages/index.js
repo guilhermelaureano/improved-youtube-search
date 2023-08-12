@@ -1,11 +1,11 @@
-import Content from '@/components/content';
 import Navbar from '@/components/navbar';
+import WrapContent from '@/components/wrapContent';
 
 function Home() {
   return (
-    <div>
+    <div className="h-screen">
       <Navbar />
-      <Content />
+      <WrapContent />
       <h1>footer</h1>
     </div>
   );

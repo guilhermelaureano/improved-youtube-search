@@ -5,7 +5,7 @@ import TimeSpent from './timespent';
 
 function Navbar() {
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="h-44 bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-center md:justify-between p-6 mx-auto">
         <div className=" w-48 flex items-center text-lg justify-center gap-4">
           <Image
