@@ -1,8 +1,7 @@
-import Image from 'next/image';
-import icon from '../../assets/images/youtube-svg.svg';
 import TimeSpent from './timespent';
 import { DarkThemeToggle, Navbar } from 'flowbite-react';
 import Form from './form';
+import { BsYoutube } from 'react-icons/bs';
 
 function WrapNavbar() {
   return (
@@ -10,14 +9,8 @@ function WrapNavbar() {
       <div className="w-full flex items-center justify-between">
         <div className="w-full flex items-center justify-between pr-10">
           <Navbar.Brand>
-            <Image
-              className="mr-3 h-6 sm:h-9"
-              src={icon}
-              alt=""
-              width="40"
-              height="40"
-            />
-            <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+            <BsYoutube size={40} />
+            <span className="ml-4 text-xl font-semibold dark:text-white">
               Improved YouTube Search
             </span>
           </Navbar.Brand>
