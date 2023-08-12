@@ -1,3 +1,4 @@
+import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import WrapContent from '@/components/wrapContent';
 
@@ -6,7 +7,7 @@ function Home() {
     <div className="h-screen">
       <Navbar />
       <WrapContent />
-      <h1>footer</h1>
+      <Footer />
     </div>
   );
 }
