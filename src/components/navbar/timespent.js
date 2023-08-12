@@ -24,7 +24,7 @@ function TimeSpent() {
         Adicione quanto tempo pretende gastar por dia da semana para assistir
         aos vídeos?
       </p>
-      <div className="w-2/3 flex items-center mx-auto gap-2">
+      <div className="w-2/3 flex items-center justify-center gap-2">
         {timeData.map((entry, key) => {
           return (
             <div key={key} className="flex w-1/7 flex-col items-center mx-auto">
