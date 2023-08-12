@@ -13,7 +13,7 @@ function useSearch() {
   };
 
   async function search() {
-    // const url = `https://www.googleapis.com/youtube/v3/search?key=AIzaSyBhUfZ82mWKToSoLvHb9c5M0RnxtAihpFk&q=${term}&type=video&part=snippet&order=relevance`;
+    // const url = `https://www.googleapis.com/youtube/v3/search?key=&q=${term}&type=video&part=snippet&order=relevance`;
     // const res = await fetch(url);
     // if (!res.ok) {
     //   throw new Error('Failed to fetch data');
