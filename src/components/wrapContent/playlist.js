@@ -8,10 +8,12 @@ function Playlist() {
 
   if (!data?.items && !loadingSearch) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="font-semibold text-2x1 sm:text-3x1 md:text-4xl lg:text-5xl text-slate-800 dark:text-slate-100">
-          O que você gostaria de ver no YouTube?
-        </p>
+      <div className="min-h-screen max-w-5xl mx-auto p-4 md:p-12 space-y-8 flex items-center justify-center">
+        <div className="mb-40 px-24 py-16 border-none rounded-2xl bg-gradient-to-br from-pink-500 to-orange-400">
+          <p className="font-semibold text-lg sm:text-2x1 md:text-2xl lg:text-4xl text-slate-800 dark:text-slate-100">
+            O que você gostaria de ver no YouTube?
+          </p>
+        </div>
       </div>
     );
   }
