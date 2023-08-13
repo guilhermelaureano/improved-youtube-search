@@ -1,40 +1,51 @@
 import useSearch from '@/hooks/useSearch';
-import { ListGroup } from 'flowbite-react';
-import PlaylistItem from './playlistItem';
-import PlayListSkeleton from './playlistSkeleton';
+import { Card } from 'flowbite-react';
+import { memo } from 'react';
 
-function Playlist() {
-  const { data, loadingSearch } = useSearch();
+function PlayListItem() {
+  const { data } = useSearch();
 
-  if (!data?.items && !loadingSearch) {
+  if (!data?.items) {
+    return;
+  }
+
+  const renderItem = item => {
+    const {
+      id: { videoId },
+      snippet: {
+        channelTitle,
+        description,
+        title,
+        thumbnails: { medium },
+      },
+    } = item;
+
+    const url = `https://www.youtube.com/watch?v=${videoId}s`;
+
     return (
-      <div className="min-h-screen max-w-5xl mx-auto p-4 md:p-12 space-y-8 flex items-center justify-center">
-        <div className="mb-40 px-24 py-16 border-none rounded-2xl bg-gradient-to-br from-pink-500 to-orange-400">
-          <p className="font-semibold text-lg sm:text-2x1 md:text-2xl lg:text-4xl text-slate-800 dark:text-slate-100">
-            O que você gostaria de ver no YouTube?
+      <a href={url} target="_blank">
+        <Card imgAlt={title} imgSrc={medium.url}>
+          <h5 className="h-12 text-sm font-bold tracking-tight text-gray-900 dark:text-white">
+            {title}
+          </h5>
+          <p className="h-14 font-normal text-gray-700 dark:text-gray-400">
+            {description}
           </p>
-        </div>
-      </div>
+          <p className="h-6 font-bold text-right text-gray-700 dark:text-gray-400">
+            {channelTitle}
+          </p>
+        </Card>
+      </a>
     );
-  }
-
-  if (loadingSearch) {
-    return (
-      <div className="min-h-screen max-w-5xl mx-auto p-4 md:p-12 space-y-8">
-        <PlayListSkeleton />
-      </div>
-    );
-  }
+  };
 
   return (
-    <div className="min-h-screen max-w-5xl mx-auto p-4 md:p-12 space-y-8">
-      <ListGroup className="w-full">
-        {data.items?.map(({ id, snippet }) => (
-          <PlaylistItem key={id.videoId} id={id.videoId} snippet={snippet} />
-        ))}
-      </ListGroup>
+    <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-4 mx-8 my-4">
+      {data.items?.map(item => {
+        return renderItem(item);
+      })}
     </div>
   );
 }
 
-export default Playlist;
+export default memo(PlayListItem);
