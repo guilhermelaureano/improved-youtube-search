@@ -1,14 +1,8 @@
-import useSearch from '@/hooks/useSearch';
-import useUser from '@/hooks/useUser';
 import { Button, TextInput } from 'flowbite-react';
+import useSearch from '@/hooks/useSearch';
 
 function Form() {
-  const { handleTerm, term } = useUser();
-  const { search } = useSearch();
-
-  const handleClick = () => {
-    search(term);
-  };
+  const { handleTerm, search, term } = useSearch();
 
   return (
     <div className="w-3/5 flex flex-col md:flex-row items-center justify-center">
@@ -17,13 +11,14 @@ function Form() {
           id="term"
           placeholder="Adicione um termo para buscar"
           type="text"
+          defaultValue={term}
         />
       </form>
       <Button
         pill
         className="ml-4"
         gradientDuoTone="pinkToOrange"
-        onClick={handleClick}
+        onClick={() => search()}
         size="sm"
       >
         Pesquisar

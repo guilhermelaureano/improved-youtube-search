@@ -1,8 +1,8 @@
-import TimeSpent from './timespent';
 import { DarkThemeToggle, Navbar } from 'flowbite-react';
-import Form from './form';
 import { BsYoutube } from 'react-icons/bs';
 import useSearch from '@/hooks/useSearch';
+import Form from './form';
+import TimeSpent from './timespent';
 
 function WrapNavbar() {
   const { data } = useSearch();

@@ -37,7 +37,7 @@ function TimeSpent() {
   return (
     <div className="md:flex-row items-center justify-center">
       <div className="flex items-center justify-center flex-col md:flex-row gap-4">
-        <div className="border rounded-full bg-gray-200 dark:bg-slate-50 flex items-center justify-center flex-col md:flex-row gap-4 pl-4">
+        <div className="border rounded-full border-gray-300 dark:border-gray-500 flex items-center justify-center flex-col md:flex-row gap-4 pl-4">
           <Tooltip
             placement="bottom"
             content="Adicione quanto tempo pretende gastar por dia da semana para assistir
