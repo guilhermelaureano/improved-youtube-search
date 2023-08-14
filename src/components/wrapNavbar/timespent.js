@@ -1,36 +1,30 @@
-import { useState } from 'react';
-import { Dropdown, Label, Navbar, TextInput } from 'flowbite-react';
+import { Button, TextInput, Tooltip } from 'flowbite-react';
+import useUser from '@/hooks/useUser';
 
 function TimeSpent() {
-  const [mon, setMon] = useState(0);
-  const [tue, setTue] = useState(0);
-  const [wed, setWed] = useState(0);
-  const [thu, setThu] = useState(0);
-  const [fri, setFri] = useState(0);
-  const [sat, setSat] = useState(0);
-  const [sun, setSun] = useState(0);
+  const { handleTime, mon, tue, wed, thu, fri, sat, sun } = useUser();
 
   const renderInputDays = () => {
     const week = [
-      { name: 'seg', handleInput: setMon, value: mon },
-      { name: 'ter', handleInput: setTue, value: tue },
-      { name: 'qua', handleInput: setWed, value: wed },
-      { name: 'qui', handleInput: setThu, value: thu },
-      { name: 'sex', handleInput: setFri, value: fri },
-      { name: 'sáb', handleInput: setSat, value: sat },
-      { name: 'dom', handleInput: setSun, value: sun },
+      { id: 'mon', name: 'seg', value: mon },
+      { id: 'tue', name: 'ter', value: tue },
+      { id: 'wed', name: 'qua', value: wed },
+      { id: 'thu', name: 'qui', value: thu },
+      { id: 'fri', name: 'sex', value: fri },
+      { id: 'sat', name: 'sáb', value: sat },
+      { id: 'sun', name: 'dom', value: sun },
     ];
 
     return week.map(entry => {
-      const { handleInput, name, value } = entry;
+      const { id, name, value } = entry;
       return (
-        <div key={name} className="flex flex-col items-center">
-          <Label value={name} />
+        <div key={name} className="flex items-center gap-2">
+          <p className="text-sm dark:text-gray-50 text-gray-800">{name}</p>
           <TextInput
-            className="w-14"
+            className="w-16"
             id={name}
             min={0}
-            onChange={e => handleInput(e.target.value)}
+            onChange={e => handleTime(id, e.target.value)}
             sizing="sm"
             value={value}
             type="number"
@@ -41,27 +35,41 @@ function TimeSpent() {
   };
 
   return (
-    <div className="flex md:order-2">
-      <Dropdown
-        dismissOnClick={false}
-        setButtonWidth={60}
-        inline
-        label={'Organize sua playlist aqui!'}
-      >
-        <Dropdown.Header>
-          <span className="block truncate text-sm font-medium">
-            Adicione quanto tempo pretende gastar por dia da semana para
-            assistir aos vídeos.
-          </span>
-        </Dropdown.Header>
-        <div className="flex items-center justify-center flex-col md:flex-row gap-2">
-          <div className="flex w-1/7 flex-col sm:flex-row items-center mx-auto gap-2 p-2">
+    <div className="md:flex-row items-center justify-center">
+      <div className="flex items-center justify-center flex-col md:flex-row gap-4">
+        <div className="border rounded-full bg-gray-200 dark:bg-slate-50 flex items-center justify-center flex-col md:flex-row gap-4 pl-4">
+          <Tooltip
+            placement="bottom"
+            content="Adicione quanto tempo pretende gastar por dia da semana para assistir
+              aos vídeos"
+          >
+            <p className="font-semibold text-lg dark:text-gray-50 text-gray-800">
+              Organize sua playlist aqui!
+            </p>
+          </Tooltip>
+          <div className="flex w-1/7 flex-col flex-wrap sm:flex-row items-center mx-auto gap-2">
             {renderInputDays()}
           </div>
-          <Navbar.Toggle />
+          <Button
+            pill
+            className="ml-4"
+            gradientDuoTone="pinkToOrange"
+            size="sm"
+            // onClick={clearState}
+          >
+            Organizar
+          </Button>
         </div>
-      </Dropdown>
-      <Navbar.Toggle />
+        <Button
+          pill
+          className="ml-4"
+          gradientDuoTone="redToYellow"
+          // onClick={clearState}
+          size="sm"
+        >
+          Nova busca
+        </Button>
+      </div>
     </div>
   );
 }

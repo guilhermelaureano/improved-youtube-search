@@ -9,7 +9,8 @@ function useUser() {
   };
 
   const handleTime = (day, value) => {
-    setState(prev => ({ ...prev, [day]: value }));
+    const newValue = value && parseInt(value, 10);
+    setState(prev => ({ ...prev, [day]: newValue }));
   };
 
   return {
@@ -23,7 +24,6 @@ function useUser() {
     fri: state.fri,
     sat: state.sat,
     sun: state.sun,
-    state,
   };
 }
 
