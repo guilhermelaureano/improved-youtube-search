@@ -1,40 +1,43 @@
 import { useContext } from 'react';
 import { getSearch } from '@/api/search';
 import { SearchContext } from '@/context/searchContext';
-// import { getParameter } from '@/utils';
+import { concatParameter } from '@/utils';
 
 function useSearch() {
   const [entry, setEntry] = useContext(SearchContext);
 
-  async function search(term) {
+  const { data, loadingSearch, result } = entry;
+
+  async function search(term, page = '') {
+    if (!term) {
+      return;
+    }
+
     setEntry(prev => ({ ...prev, loadingSearch: true }));
 
-    const result = await getSearch(term);
-    console.log('🚀 ~ search ~ result:', result);
+    const response = await getSearch(term, page);
 
-    // const { desc, id, title } = getParameter(result.items);
-
-    // const newDesc = entry.descWords;
-    // const newIDList = entry.idList;
-    // const newTitleList = entry.titleWords;
-
-    // newTitleList.push(title);
-    // newDesc.push(desc);
-    // newIDList.push(id);
-
-    setEntry(prev => ({
-      ...prev,
-      result,
-      // descWords: newDesc,
-      // idList: newIDList,
-      loadingSearch: false,
-      // titleWords: newTitleList,
-    }));
+    await setEntry(prev => {
+      const dataResp = prev.idList.concat(response.items);
+      const { descWords, idList, titleWords } = concatParameter(
+        prev,
+        response.items,
+      );
+      return {
+        ...prev,
+        data: dataResp,
+        descWords,
+        idList,
+        loadingSearch: false,
+        result,
+        titleWords,
+      };
+    });
   }
 
   return {
-    data: entry.result,
-    loadingSearch: entry.loadingSearch,
+    data,
+    loadingSearch,
     search,
   };
 }

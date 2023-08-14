@@ -4,10 +4,11 @@ const SearchContext = createContext([{}, () => {}]);
 
 const SearchProvider = props => {
   const [entry, setEntry] = useState({
-    data: {},
+    data: [],
     descWords: [],
     idList: [],
     loadingSearch: false,
+    result: {},
     titleWords: [],
   });
   return (
