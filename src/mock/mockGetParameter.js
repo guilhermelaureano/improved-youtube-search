@@ -82,15 +82,3 @@ export const mockResponse = {
     },
   ],
 };
-
-export const mockResult = {
-  descList: [
-    'O grande lançamento de 2021 da Fiat foi com certeza o Pulse. Apresentado durante o BBB, onde os participantes do programa ...',
-    'Fiat Pulse Impetus 2023: ainda é boa compra? Ou Fastback com desconto do governo é a escolha certa? Fiat Pulse Impetus.',
-  ],
-  idList: ['xEJNKsvzw3w', '67Zh_GE5QnU'],
-  titleList: [
-    'Fiat Pulse Audace 2023 - Novo motor 1.0 turbo mais forte, preço, consumo, problemas. Vale a pena?',
-    'FIAT PULSE JÁ ERA OU AINDA VALE A COMPRA? TESTE PULSE IMPETUS 2023. FASTBACK COM DESCONTO É MELHOR?',
-  ],
-};
