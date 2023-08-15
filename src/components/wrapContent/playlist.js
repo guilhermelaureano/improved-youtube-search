@@ -1,5 +1,4 @@
 import useSearch from '@/hooks/useSearch';
-import { formatTime } from '@/utils';
 import { Card } from 'flowbite-react';
 import { memo } from 'react';
 
@@ -20,7 +19,7 @@ function PlayListItem() {
             {title}
           </h5>
           <p className="h-14 font-normal text-gray-700 dark:text-gray-400">
-            <strong>{formatTime(duration)}</strong> - {description}
+            <strong>{duration.time}</strong> - {description}
           </p>
           <p className="h-6 font-bold text-right text-gray-700 dark:text-gray-400">
             {channelTitle}

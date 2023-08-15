@@ -47,7 +47,9 @@ export function formatItems(itemsList, contentDetailsList) {
     const content = contentDetailsList.find(
       content => content.id === item.id.videoId,
     );
-    newItem.duration = content ? content.contentDetails?.duration : '';
+    newItem.duration = content?.contentDetails
+      ? formatTime(content.contentDetails.duration)
+      : '';
 
     return newItem;
   });
@@ -59,5 +61,8 @@ export function formatTime(duration) {
   const secondsAmount = moment.duration(duration).asSeconds();
   const minutes = Math.floor(secondsAmount / 60);
   const seconds = String(secondsAmount % 60).padStart(2, '0');
-  return `${minutes}:${seconds}`;
+  return {
+    time: `${minutes}:${seconds}`,
+    secondsAmount,
+  };
 }
