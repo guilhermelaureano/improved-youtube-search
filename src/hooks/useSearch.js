@@ -8,7 +8,7 @@ function useSearch() {
   const [entry, setEntry, initialState] = useContext(SearchContext);
   const {
     descWords,
-    itemsList,
+    listItems,
     loadingSearch,
     pageToken,
     term,
@@ -29,14 +29,14 @@ function useSearch() {
 
     const resultListID = await getListId(idList);
 
-    const newItemsList = await formatItems(resultData, resultListID.items);
+    const newListItems = await formatItems(resultData, resultListID.items);
 
     const descWords = rankingTopFiveTerms(descList);
     const titleWords = rankingTopFiveTerms(titleList);
 
     await setEntry(prev => ({
       ...prev,
-      itemsList: newItemsList,
+      listItems: newListItems,
       descWords,
       idList,
       loadingSearch: false,
@@ -57,7 +57,7 @@ function useSearch() {
 
   return {
     descWords,
-    itemsList,
+    listItems,
     handleClearEntry,
     handleTerm,
     loadingSearch,

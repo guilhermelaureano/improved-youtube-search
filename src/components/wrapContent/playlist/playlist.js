@@ -3,9 +3,9 @@ import { memo } from 'react';
 import useSearch from '@/hooks/useSearch';
 
 function PlayListItem() {
-  const { itemsList } = useSearch();
+  const { listItems, sortedListItems } = useSearch();
 
-  if (!itemsList) {
+  if (!listItems) {
     return;
   }
 
@@ -31,7 +31,7 @@ function PlayListItem() {
 
   return (
     <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-4 mx-8 my-4">
-      {itemsList.map(item => {
+      {listItems.map(item => {
         return renderItem(item);
       })}
     </div>
