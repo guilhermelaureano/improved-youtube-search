@@ -1,4 +1,4 @@
-import TimeSpent from './timespent';
+import TimeSpent from './timeSpent';
 import TopTerms from './topTerms';
 
 function TimeDashboard() {
