@@ -1,6 +1,6 @@
-import useSearch from '@/hooks/useSearch';
 import { Card } from 'flowbite-react';
 import { memo } from 'react';
+import useSearch from '@/hooks/useSearch';
 
 function PlayListItem() {
   const { itemsList } = useSearch();

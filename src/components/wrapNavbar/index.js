@@ -2,7 +2,6 @@ import { DarkThemeToggle, Navbar } from 'flowbite-react';
 import { BsYoutube } from 'react-icons/bs';
 import useSearch from '@/hooks/useSearch';
 import Form from './form';
-import TimeSpent from './timespent';
 
 function WrapNavbar() {
   const { totalItems } = useSearch();
@@ -19,9 +18,11 @@ function WrapNavbar() {
         </div>
         <DarkThemeToggle />
       </div>
-      <div className="w-full flex items-center justify-center py-4">
-        {totalItems > 0 ? <TimeSpent /> : <Form />}
-      </div>
+      {!totalItems > 0 && (
+        <div className="w-full flex items-center justify-center py-4">
+          <Form />
+        </div>
+      )}
     </Navbar>
   );
 }
