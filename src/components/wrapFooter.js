@@ -18,7 +18,7 @@ function WrapFooter() {
         </div>
         <Footer.LinkGroup col>
           <Footer.Title className="mb-2" title="Sobre" />
-          <Footer.Link href="https://github.com/guilhermelaureano/improved-youtube-search">
+          <Footer.Link href="https://improved-youtube-search-dc9yhrvq4-guilhermelaureano.vercel.app">
             Página Vercel deste projeto
           </Footer.Link>
           <Footer.Link href="https://github.com/guilhermelaureano/improved-youtube-search">
