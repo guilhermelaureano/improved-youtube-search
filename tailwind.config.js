@@ -6,6 +6,7 @@ module.exports = {
     './public/**/*.html',
     './node_modules/flowbite-react/**/*.js',
   ],
+  darkMode: 'media',
   theme: {},
   plugins: [require('flowbite/plugin')],
 };
