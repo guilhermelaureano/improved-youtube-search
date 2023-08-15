@@ -5,7 +5,7 @@ import Form from './form';
 import TimeSpent from './timespent';
 
 function WrapNavbar() {
-  const { data } = useSearch();
+  const { totalItems } = useSearch();
   return (
     <Navbar fluid rounded>
       <div className="w-full flex items-center justify-between">
@@ -20,7 +20,7 @@ function WrapNavbar() {
         <DarkThemeToggle />
       </div>
       <div className="w-full flex items-center justify-center py-4">
-        {data.length > 0 ? <TimeSpent /> : <Form />}
+        {totalItems > 0 ? <TimeSpent /> : <Form />}
       </div>
     </Navbar>
   );

@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { getSearch } from '@/pages/api/search';
 import { SearchContext } from '@/context/searchContext';
-import { concatParameter } from '@/utils';
+import { concatParameter, formatItems } from '@/utils';
+import { getListId } from '@/pages/api/listID';
 
 function useSearch() {
   const [entry, setEntry] = useContext(SearchContext);
-
-  const { data, loadingSearch, term, pageToken } = entry;
+  const { itemsList, loadingSearch, term, pageToken, totalItems } = entry;
 
   async function search() {
     if (!term) {
@@ -14,15 +14,25 @@ function useSearch() {
     }
 
     setEntry(prev => ({ ...prev, loadingSearch: true }));
-    const response = await getSearch(term, pageToken);
-    await setEntry(prev => {
-      const params = concatParameter(prev, response);
-      return {
-        ...prev,
-        ...params,
-        loadingSearch: false,
-      };
-    });
+    const result = await getSearch(term, pageToken);
+    const { descWords, idList, resultData, titleWords, totalItems } =
+      concatParameter(entry, result);
+
+    const resultListID = await getListId(idList);
+
+    const newItemsList = await formatItems(resultData, resultListID.items);
+
+    await setEntry(prev => ({
+      ...prev,
+      itemsList: newItemsList,
+      descWords,
+      idList,
+      loadingSearch: false,
+      pageToken: result.nextPageToken && '',
+      titleWords,
+      totalItems,
+      totalResults: result.pageInfo.totalResults,
+    }));
   }
 
   const handleTerm = value => {
@@ -30,11 +40,12 @@ function useSearch() {
   };
 
   return {
-    data,
+    itemsList,
     handleTerm,
     loadingSearch,
     search,
     term,
+    totalItems,
   };
 }
 
