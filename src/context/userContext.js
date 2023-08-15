@@ -11,6 +11,7 @@ const UserProvider = props => {
     fri: 0,
     sat: 0,
     sun: 0,
+    timeSpentTotal: 0,
   };
   const [state, setState] = useState(initialState);
   return (

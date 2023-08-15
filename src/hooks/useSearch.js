@@ -12,7 +12,7 @@ function useSearch() {
     loadingSearch,
     pageToken,
     term,
-
+    sortedListItems,
     titleWords,
     totalItems,
   } = entry;
@@ -55,13 +55,19 @@ function useSearch() {
     setEntry(initialState);
   }
 
+  function handleSortedListItems(list) {
+    setEntry(prev => ({ ...prev, sortedListItems: list }));
+  }
+
   return {
     descWords,
     listItems,
     handleClearEntry,
+    handleSortedListItems,
     handleTerm,
     loadingSearch,
     search,
+    sortedListItems,
     term,
     titleWords,
     totalItems,

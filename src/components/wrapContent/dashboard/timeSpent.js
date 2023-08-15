@@ -1,10 +1,16 @@
-import { Button, TextInput } from 'flowbite-react';
+import { Button, Label, TextInput } from 'flowbite-react';
 import useUser from '@/hooks/useUser';
 import useSearch from '@/hooks/useSearch';
 
 function TimeSpent() {
-  const { handleClearState, handleDayTime, handleTimeSpent, state, week } =
-    useUser();
+  const {
+    handleClearState,
+    handleDayTime,
+    handleTimeSpent,
+    state,
+    timeSpentTotal,
+    week,
+  } = useUser();
   const { handleClearEntry } = useSearch();
 
   const renderInputDays = () => {
@@ -62,6 +68,9 @@ function TimeSpent() {
           Nova busca
         </Button>
       </div>
+      {!!timeSpentTotal && (
+        <Label className="text-lg font-semibold">{`Tempo total para ver a lista: ${timeSpentTotal}`}</Label>
+      )}
     </div>
   );
 }

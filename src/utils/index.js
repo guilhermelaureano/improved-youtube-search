@@ -17,7 +17,7 @@ export function getParameter(items) {
 export function concatParameter(prev, result) {
   const { desc, id, title } = getParameter(result.items);
 
-  const resultData = prev.itemsList.concat(result.items);
+  const resultData = prev.listItems.concat(result.items);
   const descList = prev.descWords.concat(desc);
   const idList = prev.idList.concat(id);
   const titleList = prev.titleWords.concat(title);
@@ -32,8 +32,8 @@ export function concatParameter(prev, result) {
   };
 }
 
-export function formatItems(itemsList, contentDetailsList) {
-  const newItemsList = itemsList.map(item => {
+export function formatItems(listItems, contentDetailsList) {
+  const newListItems = listItems.map(item => {
     const newItem = {
       channelId: item.snippet.channelId,
       channelTitle: item.snippet.channelTitle,
@@ -54,7 +54,7 @@ export function formatItems(itemsList, contentDetailsList) {
     return newItem;
   });
 
-  return newItemsList;
+  return newListItems;
 }
 
 export function formatTime(duration) {
@@ -67,23 +67,31 @@ export function formatTime(duration) {
   };
 }
 
-export function handleTotalTimeSpent(week, itemsList) {
+export function handleTotalTimeSpent(week, listItems) {
   const longerTimeItem = week.reduce(function (prev, current) {
     return prev.time > current.time ? prev : current;
   });
   const longerTime = longerTimeItem.time;
 
   if (longerTime === 0) {
-    return;
+    return { newListItems: [], timeSpentTotal: 0 };
   }
 
   const maxVideoTime = longerTime * 60;
-  const newItemsList = itemsList.filter(
+  const newListItems = listItems.filter(
     item => item.duration.secondsAmount < maxVideoTime,
   );
-  console.log('🚀 ~ handleTotalTimeSpent ~ newItemsList:', newItemsList);
 
-  return newItemsList;
+  let secondsAmount = 0;
+  for (const item of newListItems) {
+    secondsAmount = secondsAmount + item.duration.secondsAmount;
+  }
+
+  const timeSpentTotal = moment
+    .utc(1000 * secondsAmount)
+    .format('H[h] m[m] s[s]');
+
+  return { newListItems, timeSpentTotal };
 }
 
 export function rankingTopFiveTerms(list) {

@@ -5,7 +5,7 @@ import useSearch from './useSearch';
 
 function useUser() {
   const [state, setState, initialState] = useContext(UserContext);
-  const { listItems } = useSearch();
+  const { listItems, handleSortedListItems } = useSearch();
 
   const week = [
     { id: 'mon', name: 'seg' },
@@ -26,7 +26,16 @@ function useUser() {
     const weekTime = week.map(day => {
       return { ...day, time: state[day.id] };
     });
-    handleTotalTimeSpent(weekTime, listItems);
+
+    const { newListItems, timeSpentTotal } = handleTotalTimeSpent(
+      weekTime,
+      listItems,
+    );
+
+    if (newListItems.length > 0) {
+      setState(prev => ({ ...prev, timeSpentTotal: timeSpentTotal }));
+      handleSortedListItems(newListItems);
+    }
   };
 
   function handleClearState() {
@@ -38,6 +47,7 @@ function useUser() {
     handleDayTime,
     handleTimeSpent,
     state,
+    timeSpentTotal: state.timeSpentTotal,
     week,
   };
 }
