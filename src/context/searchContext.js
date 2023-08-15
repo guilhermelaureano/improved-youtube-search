@@ -4,8 +4,7 @@ const SearchContext = createContext([{}, () => {}]);
 
 const SearchProvider = props => {
   const initialState = {
-    descWords: [],
-    enableListIDs: false,
+    descriptionWords: [],
     idList: [],
     listItems: [],
     loadingSearch: false,

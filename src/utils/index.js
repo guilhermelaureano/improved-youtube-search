@@ -18,31 +18,36 @@ export function concatParameter(prev, result) {
   const { desc, id, title } = getParameter(result.items);
 
   const resultData = prev.listItems.concat(result.items);
-  const descList = prev.descWords.concat(desc);
+  const descriptionWords = prev.descriptionWords.concat(desc);
   const idList = prev.idList.concat(id);
-  const titleList = prev.titleWords.concat(title);
+  const titleWords = prev.titleWords.concat(title);
   const totalItems = prev.totalItems + result.pageInfo.resultsPerPage;
 
   return {
-    descList,
+    descriptionWords,
     idList,
     resultData,
-    titleList,
+    titleWords,
     totalItems,
   };
 }
 
 export function formatItems(listItems, contentDetailsList) {
   const newListItems = listItems.map(item => {
-    const newItem = {
-      channelId: item.snippet.channelId,
-      channelTitle: item.snippet.channelTitle,
-      description: item.snippet.description,
-      id: item.id.videoId,
-      title: item.snippet.title,
-      imgURL: item.snippet.thumbnails.medium.url,
-      imgURL: item.snippet.thumbnails.medium.url,
-    };
+    let newItem;
+    if (item.snippet) {
+      newItem = {
+        channelId: item.snippet.channelId,
+        channelTitle: item.snippet.channelTitle,
+        description: item.snippet.description,
+        id: item.id.videoId,
+        title: item.snippet.title,
+        imgURL: item.snippet.thumbnails.medium.url,
+        imgURL: item.snippet.thumbnails.medium.url,
+      };
+    } else {
+      newItem = item;
+    }
 
     const content = contentDetailsList.find(
       content => content.id === item.id.videoId,

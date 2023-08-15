@@ -48,8 +48,8 @@ function TimeSpent() {
         Organize sua playlist aqui!
       </p>
       <p className="mb-2 text-base dark:text-gray-50 text-gray-800">
-        Adicione quanto tempo pretende gastar por dia da semana para assistir
-        aos vídeos
+        Adicione em <strong>minutos</strong> o tempo pretende gastar por dia da
+        semana para assistir aos vídeos
       </p>
 
       <div className="h-10 flex flex-col flex-wrap sm:flex-row items-center gap-2">

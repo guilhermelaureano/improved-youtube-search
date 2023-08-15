@@ -2,8 +2,11 @@ import { Label } from 'flowbite-react';
 import useSearch from '@/hooks/useSearch';
 
 function TopTerms() {
-  const { descWords, titleWords } = useSearch();
+  const { descriptionWords, titleWords } = useSearch();
   const renderTerms = (title, words) => {
+    if (words?.lenght === 0) {
+      return;
+    }
     return (
       <div className="w-fit">
         <Label className="text-base">{title}</Label>
@@ -24,7 +27,7 @@ function TopTerms() {
     <div className="flex-grow-0">
       <Label className="text-lg font-semibold">Resultado da busca</Label>
       {renderTerms('Top 5 termos nos títulos', titleWords)}
-      {renderTerms('Top 5 termos nas descrições', descWords)}
+      {renderTerms('Top 5 termos nas descrições', descriptionWords)}
     </div>
   );
 }
