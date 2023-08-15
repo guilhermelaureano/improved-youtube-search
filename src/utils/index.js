@@ -87,6 +87,38 @@ export function handleTotalTimeSpent(week, itemsList) {
 }
 
 export function rankingTopFiveTerms(list) {
-  console.log('🚀 ~ handleTopFiveTerm ~ list:', list);
-  return ['teste', 'teste', 'teste', 'teste', 'teste'];
+  const allTerms = [];
+  const termsList = [];
+
+  for (const value of list) {
+    allTerms.push(...value.split(' '));
+  }
+
+  for (const value of allTerms) {
+    if (termsList[value]) {
+      termsList[value]++;
+    } else {
+      termsList[value] = 1;
+    }
+  }
+
+  const orderTerms = [];
+  for (const term in termsList) {
+    orderTerms.push([term, termsList[term]]);
+  }
+
+  orderTerms.sort((a, b) => b[1] - a[1]);
+
+  const topFiveTerms = [];
+
+  for (const term of orderTerms) {
+    if (topFiveTerms.length === 5) {
+      break;
+    }
+    if (term[0].length > 2 && term[0] !== 'com' && term[0] !== '...') {
+      topFiveTerms.push(term[0]);
+    }
+  }
+
+  return topFiveTerms;
 }
