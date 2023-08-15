@@ -5,7 +5,7 @@ import { concatParameter, formatItems } from '@/utils';
 import { getListId } from '@/pages/api/listID';
 
 function useSearch() {
-  const [entry, setEntry] = useContext(SearchContext);
+  const [entry, setEntry, initialState] = useContext(SearchContext);
   const { itemsList, loadingSearch, term, pageToken, totalItems } = entry;
 
   async function search() {
@@ -39,8 +39,13 @@ function useSearch() {
     setEntry(prev => ({ ...prev, term: value }));
   };
 
+  function handleClearEntry() {
+    setEntry(initialState);
+  }
+
   return {
     itemsList,
+    handleClearEntry,
     handleTerm,
     loadingSearch,
     search,

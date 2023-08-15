@@ -3,7 +3,7 @@ import { createContext, useState } from 'react';
 const UserContext = createContext([{}, () => {}]);
 
 const UserProvider = props => {
-  const [state, setState] = useState({
+  const initialState = {
     mon: 0,
     tue: 0,
     wed: 0,
@@ -11,10 +11,10 @@ const UserProvider = props => {
     fri: 0,
     sat: 0,
     sun: 0,
-    term: '',
-  });
+  };
+  const [state, setState] = useState(initialState);
   return (
-    <UserContext.Provider value={[state, setState]}>
+    <UserContext.Provider value={[state, setState, initialState]}>
       {props.children}
     </UserContext.Provider>
   );

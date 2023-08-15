@@ -66,3 +66,22 @@ export function formatTime(duration) {
     secondsAmount,
   };
 }
+
+export function handleTotalTimeSpent(week, itemsList) {
+  const longerTimeItem = week.reduce(function (prev, current) {
+    return prev.time > current.time ? prev : current;
+  });
+  const longerTime = longerTimeItem.time;
+
+  if (longerTime === 0) {
+    return;
+  }
+
+  const maxVideoTime = longerTime * 60;
+  const newItemsList = itemsList.filter(
+    item => item.duration.secondsAmount < maxVideoTime,
+  );
+  console.log('🚀 ~ handleTotalTimeSpent ~ newItemsList:', newItemsList);
+
+  return longerTime;
+}

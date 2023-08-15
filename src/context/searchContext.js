@@ -3,7 +3,7 @@ import { createContext, useState } from 'react';
 const SearchContext = createContext([{}, () => {}]);
 
 const SearchProvider = props => {
-  const [entry, setEntry] = useState({
+  const initialState = {
     descWords: [],
     enableListIDs: false,
     idList: [],
@@ -14,9 +14,10 @@ const SearchProvider = props => {
     titleWords: [],
     totalItems: 0,
     totalResults: 0,
-  });
+  };
+  const [entry, setEntry] = useState(initialState);
   return (
-    <SearchContext.Provider value={[entry, setEntry]}>
+    <SearchContext.Provider value={[entry, setEntry, initialState]}>
       {props.children}
     </SearchContext.Provider>
   );

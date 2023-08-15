@@ -1,23 +1,44 @@
 import { useContext } from 'react';
 import { UserContext } from '@/context/userContext';
+import { handleTotalTimeSpent } from '@/utils';
+import useSearch from './useSearch';
 
 function useUser() {
-  const [state, setState] = useContext(UserContext);
+  const [state, setState, initialState] = useContext(UserContext);
+  const { itemsList } = useSearch();
 
-  const handleTime = (day, value) => {
-    const newValue = value && parseInt(value, 10);
-    setState(prev => ({ ...prev, [day]: newValue }));
+  const week = [
+    { id: 'mon', name: 'seg' },
+    { id: 'tue', name: 'ter' },
+    { id: 'wed', name: 'qua' },
+    { id: 'thu', name: 'qui' },
+    { id: 'fri', name: 'sex' },
+    { id: 'sat', name: 'sáb' },
+    { id: 'sun', name: 'dom' },
+  ];
+
+  const handleDayTime = (id, time) => {
+    const newTime = time && parseInt(time, 10);
+    setState(prev => ({ ...prev, [id]: newTime }));
   };
 
+  const handleTimeSpent = () => {
+    const weekTime = week.map(day => {
+      return { ...day, time: state[day.id] };
+    });
+    handleTotalTimeSpent(weekTime, itemsList);
+  };
+
+  function handleClearState() {
+    setState(initialState);
+  }
+
   return {
-    handleTime,
-    mon: state.mon,
-    tue: state.tue,
-    wed: state.wed,
-    thu: state.thu,
-    fri: state.fri,
-    sat: state.sat,
-    sun: state.sun,
+    handleClearState,
+    handleDayTime,
+    handleTimeSpent,
+    state,
+    week,
   };
 }
 
