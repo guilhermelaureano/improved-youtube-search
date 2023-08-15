@@ -18,16 +18,16 @@ export function concatParameter(prev, result) {
   const { desc, id, title } = getParameter(result.items);
 
   const resultData = prev.itemsList.concat(result.items);
-  const descWords = prev.descWords.concat(desc);
+  const descList = prev.descWords.concat(desc);
   const idList = prev.idList.concat(id);
-  const titleWords = prev.titleWords.concat(title);
+  const titleList = prev.titleWords.concat(title);
   const totalItems = prev.totalItems + result.pageInfo.resultsPerPage;
 
   return {
-    descWords,
+    descList,
     idList,
     resultData,
-    titleWords,
+    titleList,
     totalItems,
   };
 }
@@ -83,5 +83,10 @@ export function handleTotalTimeSpent(week, itemsList) {
   );
   console.log('🚀 ~ handleTotalTimeSpent ~ newItemsList:', newItemsList);
 
-  return longerTime;
+  return newItemsList;
+}
+
+export function rankingTopFiveTerms(list) {
+  console.log('🚀 ~ handleTopFiveTerm ~ list:', list);
+  return ['teste', 'teste', 'teste', 'teste', 'teste'];
 }
