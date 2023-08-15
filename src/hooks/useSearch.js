@@ -12,13 +12,14 @@ function useSearch() {
     if (!loadingSearch && descriptionWords.length && titleWords.length) {
       const topDescriptionWords = rankingTopFiveTerms(descriptionWords);
       const toptitleWords = rankingTopFiveTerms(titleWords);
-      setEntry(prev => ({
-        ...prev,
+      setEntry({
+        ...entry,
         descriptionWords: topDescriptionWords,
         titleWords: toptitleWords,
-      }));
+      });
     }
-  }, [descriptionWords, loadingSearch, setEntry, titleWords]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadingSearch]);
 
   async function search() {
     if (!entry.term) {
