@@ -89,7 +89,7 @@ export function handleTotalTimeSpent(week, listItems) {
 
   const timeSpentTotal = moment
     .utc(1000 * secondsAmount)
-    .format('H[h] m[m] s[s]');
+    .format('HH[h] mm[m] ss[s]');
 
   return { newListItems, timeSpentTotal };
 }
