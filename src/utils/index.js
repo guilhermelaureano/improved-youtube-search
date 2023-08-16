@@ -19,7 +19,7 @@ export function concatParameter(prev, result) {
 
   const resultData = prev.listItems.concat(result.items);
   const descriptionWords = prev.descriptionWords.concat(desc);
-  const idList = prev.idList.concat(id);
+  const idList = id;
   const titleWords = prev.titleWords.concat(title);
   const totalItems = prev.totalItems + result.pageInfo.resultsPerPage;
 
