@@ -79,6 +79,7 @@ export function handleTotalTimeSpent(week, listItems) {
   const longerTime = longerTimeItem.time;
 
   if (longerTime === 0) {
+    alert('Adiciona minutos em ao menos um dia.');
     return { newListItems: [], timeSpentTotal: 0 };
   }
 
@@ -96,7 +97,9 @@ export function handleTotalTimeSpent(week, listItems) {
     .utc(1000 * secondsAmount)
     .format('HH[h] mm[m] ss[s]');
 
-  return { newListItems, timeSpentTotal };
+  const sortedListItems = generateSortedListItems(week, newListItems);
+
+  return { sortedListItems, timeSpentTotal };
 }
 
 export function rankingTopFiveTerms(list) {
@@ -134,4 +137,46 @@ export function rankingTopFiveTerms(list) {
   }
 
   return topFiveTerms;
+}
+
+export function generateSortedListItems(
+  week,
+  newListItems,
+  sortedListItems = [],
+) {
+  let listControl = newListItems;
+
+  for (const day of week) {
+    let items = [];
+    if (day.time > 0) {
+      const dayTimeSeconds = day.time * 60;
+      let count = dayTimeSeconds;
+
+      for (const item of listControl) {
+        if (count >= item.duration.secondsAmount) {
+          count -= item.duration.secondsAmount;
+          const itemToPush = listControl.shift();
+          items.push(itemToPush);
+        } else {
+          break;
+        }
+      }
+
+      if (items.length > 0) {
+        sortedListItems.push({
+          day: day,
+          items,
+        });
+      }
+    }
+  }
+
+  if (listControl.length > 0) {
+    sortedListItems = generateSortedListItems(
+      week,
+      listControl,
+      sortedListItems,
+    );
+  }
+  return sortedListItems;
 }

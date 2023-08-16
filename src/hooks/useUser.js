@@ -8,13 +8,13 @@ function useUser() {
   const { listItems, handleSortedListItems } = useSearch();
 
   const week = [
-    { id: 'mon', name: 'seg' },
-    { id: 'tue', name: 'ter' },
-    { id: 'wed', name: 'qua' },
-    { id: 'thu', name: 'qui' },
-    { id: 'fri', name: 'sex' },
-    { id: 'sat', name: 'sáb' },
-    { id: 'sun', name: 'dom' },
+    { id: 'mon', name: 'seg', fullName: 'Segunda-feira' },
+    { id: 'tue', name: 'ter', fullName: 'Terça-feira' },
+    { id: 'wed', name: 'qua', fullName: 'Quarta-feira' },
+    { id: 'thu', name: 'qui', fullName: 'Quinta-feira' },
+    { id: 'fri', name: 'sex', fullName: 'Sexta-feira' },
+    { id: 'sat', name: 'sáb', fullName: 'Sábado' },
+    { id: 'sun', name: 'dom', fullName: 'Domingo' },
   ];
 
   const handleDayTime = (id, time) => {
@@ -27,14 +27,14 @@ function useUser() {
       return { ...day, time: state[day.id] };
     });
 
-    const { newListItems, timeSpentTotal } = handleTotalTimeSpent(
+    const { sortedListItems, timeSpentTotal } = handleTotalTimeSpent(
       weekTime,
       listItems,
     );
 
-    if (newListItems.length > 0) {
+    if (sortedListItems && sortedListItems.length > 0) {
       setState(prev => ({ ...prev, timeSpentTotal: timeSpentTotal }));
-      handleSortedListItems(newListItems);
+      handleSortedListItems(sortedListItems);
     }
   };
 

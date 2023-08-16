@@ -30,22 +30,33 @@ function PlayListItem() {
   };
 
   const renderSortedListItems = () => {
-    return sortedListItems.map(item => {
-      return renderItem(item);
+    return sortedListItems.map((entry, key) => {
+      return (
+        <div key={key}>
+          <h5 className="mx-8 mt-8 mb-16 text-xl font-semibold tracking-tight text-gray-700 dark:text-white">
+            {entry.day.fullName}
+          </h5>
+          <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-4 mx-8 mt-4 mb-16">
+            {entry.items.map(item => {
+              return renderItem(item);
+            })}
+          </div>
+        </div>
+      );
     });
   };
 
   const renderListItems = () => {
-    return listItems.map(item => {
-      return renderItem(item);
-    });
+    return (
+      <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-4 mx-8 my-4">
+        {listItems.map(item => renderItem(item))}
+      </div>
+    );
   };
 
-  return (
-    <div className="grid xl:grid-cols-3 lg:grid-cols-2 gap-4 mx-8 my-4">
-      {sortedListItems.length > 0 ? renderSortedListItems() : renderListItems()}
-    </div>
-  );
+  return sortedListItems.length > 0
+    ? renderSortedListItems()
+    : renderListItems();
 }
 
 export default memo(PlayListItem);
