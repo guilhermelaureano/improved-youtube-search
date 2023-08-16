@@ -1,5 +1,4 @@
 import axios from 'axios';
-import qs from 'qs';
 
 async function getListId(listID) {
   const url = process.env.NEXT_PUBLIC_URL_YOUTUBE_API_VIDEOS;
@@ -8,11 +7,8 @@ async function getListId(listID) {
       params: {
         key: process.env.NEXT_PUBLIC_API_KEY,
         part: 'contentDetails',
-        id: listID,
+        id: listID.toString(),
         maxResults: 50,
-      },
-      paramsSerializer: params => {
-        return qs.stringify(params, { arrayFormat: 'repeat' });
       },
     });
     return data;
