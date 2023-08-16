@@ -1,6 +1,34 @@
+# Comentário sobre o desafio
+
+## Processo de densevolvimento
+
+Iniciei o processo de desenvolvimento separando as tarefas em partes menores e aproveitei a ferramenta de projetos disponibilizada pela github para organizar as tarefas em um quadro, [@guilhermelaureano's improved-youtube-search project](https://github.com/users/guilhermelaureano/projects/1), e assim, poder vizualizar melhor cada etapa da tarefa que teria que atuar.
+
+Gostei de trabalhar com a estrutura disponibilizada pelo [NextJS](https://nextjs.org/) e de usar [Tailwind](https://tailwindui.com/) e [Flowbite]() junto com o [ReactJS](https://react.dev/).
+
+A utilização do Nextjs + Vercel junto ao github proporcionou que fosse possivel chegar até o final do processo, com o deploy da aplicação, disponível [`aqui`](https://improved-youtube-search-git-main-guilhermelaureano.vercel.app/).
+
+Para buscar os dados, em um primeiro momento, optei por usar a função featch do JS, mas no fim acabei optando por usar a facilidade do [Axios](https://axios-http.com/), detalho a experiência no item abaixo.
+
+## Desafios encontrados
+
+Em um primeiro momento optei em utilizar o formato de arquivo em JavaScript, o que no passar do tempo, me fez refletir e constatar que foi um equivoco e que a utilização de TypeScript seria o mais correto e que certamente será um próximo passo de melhoria para o projeto.
+
+Outro ponto foi a utilização da [API do YouTube](https://developers.google.com/youtube/v3/docs/videos/list?hl=pt-br), eu ainda não tinha utilizado o serviço. Este projeto consome dois endpoints. Para o primeiro endpoint utilizado para realizar a busca de vídeos através de um determinado termo, foi utilizado o [`search`](https://developers.google.com/youtube/v3/docs/search). O segundo endpoint foi o de [`video`](https://developers.google.com/youtube/v3/docs/videos), o qual foi utilizado para buscar mais informações sobre cada vídeo atráves de uma lista com os `ids` dos vídeo.
+
+A parte de testes foi um ponto que senti falta e que fiquei devendo, a intenção é de poder retomar isso junto com uma refatoração para TypeScript.
+
+---
+
 # improved-youtube-search
 
 - Project created to present an improved search in the results of YouTube videos.
+- This project consumes the [YouTube Data API v3](https://developers.google.com/youtube/) to fetch data and show the videos.
+
+* Welcome
+  ![welcome screen](./assets/welcome_screen.png)
+* After search
+  ![playlist](./assets/playlist.png)
 
 ---
 
